@@ -14,17 +14,41 @@
 
     
         <input type="text" id="input" onkeyup="getNameStartsWith()"/> 
-        <button type="button" onclick='doSomething()'>Do Something!</button>
+        <button type="button" onclick='getCharacterInfo()'>Do Something!</button>
 
         <div>
-            <h2>Characters</h2>
+            <h2>Characters Typeahead</h2>
             <p id="char0"></p>
             <p id="char1"></p>
             <p id="char2"></p>
             <p id="char3"></p>
             <p id="char4"></p>
-            
         </div>
+
+        <div>
+            <h2>Character Object</h2>
+            <h3 id="charName"></h3>
+            <p id="charDesc"></p>
+            <img id="charPic" src="" alt="Character Image">
+        </div>
+
+        <div>
+            <h2>Comic Info 0</h2>
+            <h3 id="comName0"></h3>
+            <img id="comPic0" src="" alt="">
+        </div>
+        <div>
+            <h2>Comic Info 1</h2>
+            <h3 id="comName1"></h3>
+            <img id="comPic1" src="" alt="">
+        </div>
+        <div>
+            <h2>Comic Info 2</h2>
+            <h3 id="comName2"></h3>
+            <img id="comPic2" src="" alt="">
+        </div>
+
+
     <script src="index.js"></script>
 </body>
 </html>

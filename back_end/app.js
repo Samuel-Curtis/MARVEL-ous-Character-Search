@@ -17,11 +17,14 @@ app.get("/", function(req, res) {
     res.sendFile('/index.html');
 })
 
-// Will be renamed to getByName
-app.post("/doSomething", function(req, res) {
-    var input = req.body.value;
-    console.log("okay I'm doing something!", input)
-    mf.findByName(input);
+
+app.post("/getCharacterInfo", async function(req, res) {
+    var name = req.body.value;
+
+    let character = await mf.findByName(name);
+    let comicArr = await mf.getComicsByCharId(character.id)
+
+    res.json({character: character, comics: comicArr});
 })
 
 // Used for populating typeahead search feature
@@ -31,10 +34,10 @@ app.post("/getNameStartsWith", async function(req, res) {
     console.log("Getting Name Starts With: ", name);
     let characterNames = await mf.getNameStartsWith(name);
     
-    if(characterNames !== undefined) {
-      console.log("Characters array in app.js: ", characterNames);
-      res.json({characters: characterNames});
-    }
+    
+    console.log("Characters array in app.js: ", characterNames);
+    res.json({characters: characterNames});
+    
 })
 
 // If request is not found, render this page
@@ -42,7 +45,9 @@ app.get("*", function (req, res) {
     // res render "We dont have that page in stock!"
   });
 
-// Start the server on port 3000
+
+// Start the server on port 
+const port = process.env.port || 3000;
 app.listen(3000, function () {
-    console.log("Example app listening on port 3000!");
+    console.log("Server started! Listening on port: ", port);
   });

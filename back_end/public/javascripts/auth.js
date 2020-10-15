@@ -3,7 +3,6 @@ const md5 = require('md5');
 // Returns unique timestamp to use each time the API is called
 function getTimeStamp() {
     let ts = Date.now();
-    console.log("Timestamp generated: ", ts);
     return ts;
 }
 

@@ -1,12 +1,35 @@
-function doSomething() {
-    console.log("doSomething was called")
-    var input = {
-        value: document.getElementById('input').value
+function getCharacterInfo() {
+    var input = document.getElementById('input').value
+    
+    if (input === "") {
+        console.log("Input Blank, do not call.")
+    } else {
+        axios
+        .post('/getCharacterInfo', {
+            value: input
+        })
+        .then(response => {
+            let res = response.data;
+            console.log("Character Object: ", res.character);
+            console.log("Comics Arr: ", res.comics)
+
+            document.getElementById('charName').innerHTML = res.character.name;
+            document.getElementById('charDesc').innerHTML = res.character.description;
+            document.getElementById('charPic').src = res.character.picture;
+
+            document.getElementById('comName0').innerHTML = res.comics[0].name
+            document.getElementById('comPic0').src = res.comics[0].picture;
+            
+            document.getElementById('comName1').innerHTML = res.comics[1].name
+            document.getElementById('comPic1').src = res.comics[1].picture;
+            
+            document.getElementById('comName2').innerHTML = res.comics[2].name
+            document.getElementById('comPic2').src = res.comics[2].picture;
+        })
+        .catch(err => {
+            console.log("ERROR OCCURED IN AXIOS FE: ", err)
+        })
     }
-    var xhr = new window.XMLHttpRequest()
-    xhr.open('POST', '/doSomething', true)
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-    xhr.send(JSON.stringify(input))
 }
 
 async function getNameStartsWith() {
@@ -35,25 +58,3 @@ async function getNameStartsWith() {
     }
 
 }
-
-/*  
-
-var input = {
-        value: document.getElementById('input').value
-    }
-
-else {
-
-
-
-        var xhr = new window.XMLHttpRequest()
-        xhr.open('POST', '/getNameStartsWith', true)
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-        xhr.onload = function(e) {
-            alert(xhr.responseText)
-          };
-        xhr.send(JSON.stringify(input))
-        
-        
-    }
-*/
