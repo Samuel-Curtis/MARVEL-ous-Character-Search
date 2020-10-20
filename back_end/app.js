@@ -20,7 +20,6 @@ app.get("/", function(req, res) {
 
 app.post("/getCharacterInfo", async function(req, res) {
     var name = req.body.value;
-
     let character = await mf.findByName(name);
     let comicArr = await mf.getComicsByCharId(character.id)
 

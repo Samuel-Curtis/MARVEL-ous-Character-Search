@@ -1,0 +1,64 @@
+
+
+/* Search Bar */
+#search {
+    background: #C4C4C4;
+    border: 1px solid #000000;
+    box-shadow: #000000;
+    border-top-left-radius: 5em;
+    border-top-right-radius: 5em;
+    border-bottom-right-radius: 5em;
+    
+    width: 25em;
+    height: 5em;
+}
+
+input[type=text] {
+    color: red;
+    font-size: large;
+}
+
+#parent {
+    position: relative;
+}
+
+#myNavbar {
+    background-color: #171717;
+}
+
+#autocomplete {
+    position: absolute;
+    border: 1px solid #000000;
+    z-index: 5;
+    left: 0;
+    top: 100%;
+    width: 20em;
+    height: 5em;
+    background: #C4C4C4;
+    visibility: hidden;
+}
+
+/* JQuery Typeahead */
+.ui-front {
+    z-index: 1500 !important;
+}
+
+#searchButton {
+    position: absolute;
+    border: #ed1d24 solid 2px;
+    z-index: 5;
+    right: 25%;
+    top: 10%;
+}
+
+#searchButtonIcon {
+    height: 4em;
+    width: 4em;
+}
+
+#mainPage {
+    background: linear-gradient(rgba(23, 23, 23, 1), rgba(237, 29, 36, .2)), url('./Images/comic_background.png');
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}

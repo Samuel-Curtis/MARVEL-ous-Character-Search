@@ -1,54 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- AXIOS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>MARVEL-ous Character Search</title>
+  <!-- My CSS -->
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- AXIOS CDN 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <title>Marvel Character Search!</title>
 </head>
+
 <body>
-    <h1>Character Search Page</h1>
+  <!-- NAV BAR -->
+  <nav id="myNavbar" class="navbar" style="border: solid blue 2px;">
 
+    <!-- MARVEL LOGO -->
+    <div class="col" style="border: solid pink 2px;">
+      <a id="logo" class="navbar-brand" href="https://www.marvel.com/" target="_blank">
+        <img src="./Images/MarvelLogo.png" alt="Marvel">
+      </a>
+    </div>
+
+    <div class="col-4" style="border: solid purple 2px;"></div>
+
+    <!-- SEARCH BAR -->
+    <div class="col" style="border: solid red 2px;">
+
+        <form onsubmit="getCharacterInfo()" autocomplete="off">
+
+          <input type="text" name="search" id="search" placeholder="Search For Your Favorite Characters..." style="border: blue solid 2px;" >
+
+          <!-- SUBMIT BUTTON -->
+          <div id="searchButton" class="input-group-append">
+            <button class="btn" type="button">
+              <img id="searchButtonIcon" onclick='getCharacterInfo()' src="./Images/ThorHammer.svg" alt="Thor Hammer Icon">
+            </button>
+          </div>
+
+        </form>
+      
+    </div>
+
+  </nav> <!-- NAV BAR -->
+
+  <!-- MAIN PAGE CONTAINER -->
+  <div id="mainPage" class="container-fluid">
+
+    <div class="row">
+
+      <div class="col"></div>
+
+      <div class="col-6">
+
+        <!-- MAIN CHARACTER DISPLAY -->
+        <div class="jumbotron">
+
+          <img id="charPic" alt="Picture of selected character">
+          <h1 id="charName"></h1>
+          <p id="charDesc"></p>
+
+        </div>
+
+      </div>
+
+      <div class="col"></div>
+
+    </div>
+
+    <!-- COMICS DISPLAY -->
+    <div class="row">
+
+      <div class="col-4">
+        <img id="comPic0" alt="">
+        <h1 id="comName0"></h1>
+      </div>
+
+      <div class="col-4">
+        <img id="comPic1" alt="">
+        <h1 id="comName1"></h1>
+      </div>
+
+      <div class="col-4">
+        <img id="comPic2" alt="">
+        <h1 id="comName2"></h1>
+      </div>
+      
+    </div>
+
+  </div> <!-- CONTAINER -->
+  
+  <!-- BootStrap: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
     
-        <input type="text" id="input" onkeyup="getNameStartsWith()"/> 
-        <button type="button" onclick='getCharacterInfo()'>Do Something!</button>
+    <!-- JQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
-        <div>
-            <h2>Characters Typeahead</h2>
-            <p id="char0"></p>
-            <p id="char1"></p>
-            <p id="char2"></p>
-            <p id="char3"></p>
-            <p id="char4"></p>
-        </div>
-
-        <div>
-            <h2>Character Object</h2>
-            <h3 id="charName"></h3>
-            <p id="charDesc"></p>
-            <img id="charPic" src="" alt="Character Image">
-        </div>
-
-        <div>
-            <h2>Comic Info 0</h2>
-            <h3 id="comName0"></h3>
-            <img id="comPic0" src="" alt="">
-        </div>
-        <div>
-            <h2>Comic Info 1</h2>
-            <h3 id="comName1"></h3>
-            <img id="comPic1" src="" alt="">
-        </div>
-        <div>
-            <h2>Comic Info 2</h2>
-            <h3 id="comName2"></h3>
-            <img id="comPic2" src="" alt="">
-        </div>
-
-
-    <script src="index.js"></script>
+    <!-- Index JS -->
+    <script src="/javascripts/index.js"></script>
 </body>
+
 </html>
