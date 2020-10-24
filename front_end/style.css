@@ -1,64 +1,192 @@
-
-
-/* Search Bar */
-#search {
-    background: #C4C4C4;
-    border: 1px solid #000000;
-    box-shadow: #000000;
-    border-top-left-radius: 5em;
-    border-top-right-radius: 5em;
-    border-bottom-right-radius: 5em;
-    
-    width: 25em;
-    height: 5em;
+@font-face {
+  font-family: 'comic_bookregular';
+  src: url('./fonts/webfontkit-20201023-131829/comic_book-webfont.woff') format('woff'),
+       url('./fonts/webfontkit-20201023-131829/comic_book-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
-input[type=text] {
-    color: red;
-    font-size: large;
+body {
+  font-family: 'comic_bookregular';
 }
 
-#parent {
-    position: relative;
+html, body {
+  position: relative;
+  min-height: 100%;
 }
 
+/* Nav Bar */
 #myNavbar {
-    background-color: #171717;
+  background-color: #171717;
 }
 
-#autocomplete {
-    position: absolute;
-    border: 1px solid #000000;
-    z-index: 5;
-    left: 0;
-    top: 100%;
-    width: 20em;
-    height: 5em;
-    background: #C4C4C4;
-    visibility: hidden;
+#logo {
+  margin-left: 5em;
 }
+
+/* SEARCH FORM */
+form {
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Search Bar Style */
+input[type=text] {
+  background: #C4C4C4;
+  border: 1px solid #000000;
+  box-shadow: 5px 5px 5px 5px rgba(196,196,196,0.1);
+  border-top-left-radius: 5em;
+  border-top-right-radius: 5em;
+  border-bottom-right-radius: 5em;
+  padding-right: 5em;
+  font-size: 1.05em;
+  width: 25em;
+  height: 4.25em;
+  padding-top: 2em;
+  color: #171717;
+  font-size: 1.05em;
+  text-indent: .5em;
+}
+
+input::placeholder, ::-moz-placeholder, ::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+
+/* Submit Button Style */
+input[type=submit] {
+  position: absolute;
+  background: url(./Images/ThorHammer.svg);
+  margin-left: -5.5em;
+  background-color: #C4C4C4;
+  border: none;
+  height: 4em;
+  width: 4em;
+  border-radius: 5em;
+  padding-top: 4em;
+  margin-top: .33em;
+  z-index: 500;
+  }
 
 /* JQuery Typeahead */
 .ui-front {
     z-index: 1500 !important;
+    width: 20em !important;
 }
 
-#searchButton {
-    position: absolute;
-    border: #ed1d24 solid 2px;
-    z-index: 5;
-    right: 25%;
-    top: 10%;
+.ui-autocomplete { 
+  list-style-position: outside;
+  list-style-type: none;
+  position: absolute; 
+  cursor: default; 
+  background: #C4C4C4; 
 }
 
-#searchButtonIcon {
-    height: 4em;
-    width: 4em;
+.ui-autocomplete .ui-menu-item {
+  text-align: left;
+  list-style-position: outside;
+  list-style-type: none;
 }
 
+.ui-autocomplete .ui-menu-item:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.ui-helper-hidden-accessible { 
+  display:none; 
+}
+
+/* Main Page Content */
 #mainPage {
-    background: linear-gradient(rgba(23, 23, 23, 1), rgba(237, 29, 36, .2)), url('./Images/comic_background.png');
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+  position: relative;
+  background: linear-gradient(rgba(23, 23, 23, 1), rgba(237, 29, 36, .2)), url('./Images/comic_background.png');
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  overflow-y: scroll;
+}
+
+.jumbotron {
+  justify-content: center;
+  background-color: #C4C4C4;
+  min-width: 250px;
+}
+
+.jumbotron img {
+  border-radius: 2em;
+  box-shadow: 5px 5px 5px 5px rgba(23, 23, 23, 0.3);
+}
+
+#footer {
+  opacity: 1; 
+  background-color: rgba(0,0,0,0.8);
+  width: 100%;
+}
+
+#footer a {
+  color: #bbb;
+}
+
+.hide{
+  visibility: hidden;
+}
+
+#comic-container {
+  position: relative;
+  height: 100%;
+  justify-content: center;
+}
+
+/* COMIC CARD FLIP */
+.card {
+  position: relative;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  background: transparent;
+  box-shadow: 5px 5px 5px 5px rgba(23, 23, 23, 0.5);
+  /* The Size of the images retrieved from the Marvel API */
+  width: 216px;
+  height: 324px;
+  perspective: 1000px;
+}
+  
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform .5s;
+  transform-style: preserve-3d;
+}
+  
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+  height: 100%;
+}
+  
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+}
+  
+.card-front {
+  background-color: #bbb;
+  color: black;
+}
+  
+.card-back {
+  height: 100%;
+  overflow-y: scroll;
+  background-color: #C4C4C4;
+  padding-left: 2px;
+  padding-right: 2px;
+  color: #171717;
+  transform: rotateY(180deg);
 }

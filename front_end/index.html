@@ -12,104 +12,162 @@
   <!-- My CSS -->
   <link rel="stylesheet" href="/style.css">
 
-  <!-- AXIOS CDN 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
-  -->
+  <!-- AXIOS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <title>Marvel Character Search!</title>
 </head>
 
 <body>
-  <!-- NAV BAR -->
-  <nav id="myNavbar" class="navbar" style="border: solid blue 2px;">
-
-    <!-- MARVEL LOGO -->
-    <div class="col" style="border: solid pink 2px;">
+  <!-- Nav Bar -->
+  <nav id="myNavbar" class="navbar mx-auto">
+    <div class="container-fluid">
+    <!-- MARVEL Logo -->
+    <div class="col">
       <a id="logo" class="navbar-brand" href="https://www.marvel.com/" target="_blank">
         <img src="./Images/MarvelLogo.png" alt="Marvel">
       </a>
     </div>
 
-    <div class="col-4" style="border: solid purple 2px;"></div>
+    <div class="col-md-0 col-lg-4"></div>
 
-    <!-- SEARCH BAR -->
-    <div class="col" style="border: solid red 2px;">
+    <div class="col">
 
-        <form onsubmit="getCharacterInfo()" autocomplete="off">
+      <form autocomplete="off" onsubmit="return false">
 
-          <input type="text" name="search" id="search" placeholder="Search For Your Favorite Characters..." style="border: blue solid 2px;" >
+        <!-- SEARCH BAR -->
+        <input type="text" id="search" placeholder="Search For Your Favorite Characters...">
 
-          <!-- SUBMIT BUTTON -->
-          <div id="searchButton" class="input-group-append">
-            <button class="btn" type="button">
-              <img id="searchButtonIcon" onclick='getCharacterInfo()' src="./Images/ThorHammer.svg" alt="Thor Hammer Icon">
-            </button>
-          </div>
+        <!-- SUBMIT BUTTON -->
+        <input type="submit" value="" onclick='getCharacterInfo()'>
 
-        </form>
-      
+      </form>
     </div>
 
+  </div>
   </nav> <!-- NAV BAR -->
+
 
   <!-- MAIN PAGE CONTAINER -->
   <div id="mainPage" class="container-fluid">
+    <div class="hide">
+      <div class="row">
 
-    <div class="row">
+        <div class="col"></div>
 
-      <div class="col"></div>
+        <div class="col-4">
 
-      <div class="col-6">
+          <!-- MAIN CHARACTER DISPLAY -->
+          <div class="jumbotron text-center justify-content-center">
 
-        <!-- MAIN CHARACTER DISPLAY -->
-        <div class="jumbotron">
-
-          <img id="charPic" alt="Picture of selected character">
-          <h1 id="charName"></h1>
-          <p id="charDesc"></p>
+            <img id="charPic">
+            <h1 id="charName"></h1>
+            <p id="charDesc"></p>
+            <a id="charLink" target="_blank" href="">Visit Official Wiki</a>
+          </div>
 
         </div>
 
+        <div class="col"></div>
+
       </div>
 
-      <div class="col"></div>
+      <!-- COMICS DISPLAY -->
+      <div class="container" id="comic-container">
+        <div class="row">
 
+          <!-- First Comic -->
+          <div class="col-md-12 col-lg-4 d-flex justify-content-center">
+
+            <div class="card">
+              <div class="card-inner">
+
+                <!-- FRONT -->
+                <div class="card-front">
+                  <img id="comPic0" alt="">
+                </div>
+
+                <!-- BACK -->
+                <div class="card-back">
+                  <h3 id="comName0"></h3>
+                  <p id="comDesc0"></p>
+                  <a id="comLink0" target="_blank" href="">Visit Official Wiki</a>
+                </div>
+
+              </div>
+            </div>
+
+          </div> <!-- col -->
+
+          <!-- Second Comic -->
+          <div class="col-md-12 col-lg-4 d-flex justify-content-center">
+
+            <div class="card">
+              <div class="card-inner">
+
+                <!-- FRONT -->
+                <div class="card-front">
+                  <img id="comPic1" alt="">
+                </div>
+
+                <!-- BACK -->
+                <div class="card-back">
+                  <h3 id="comName1"></h3>
+                  <p id="comDesc1"></p>
+                  <a id="comLink1" target="_blank" href="">Visit Official Wiki</a>
+                </div>
+
+              </div>
+            </div>
+
+          </div> <!-- col -->
+
+          <!-- Third Comic -->
+          <div class="col-md-12 col-lg-4 d-flex justify-content-center">
+
+            <div class="card">
+              <div class="card-inner">
+
+                <!-- FRONT -->
+                <div class="card-front">
+                  <img id="comPic2" alt="">
+                </div>
+
+                <!-- BACK -->
+                <div class="card-back">
+                  <h3 id="comName2"></h3>
+                  <p id="comDesc2"></p>
+                  <a id="comLink2" target="_blank" href="">Visit Official Wiki</a>
+                </div>
+
+              </div>
+            </div>
+
+          </div> <!-- col -->
+
+        </div>
+      </div> <!-- Comic Container -->
     </div>
+  </div> <!-- Main Page Container -->
 
-    <!-- COMICS DISPLAY -->
-    <div class="row">
-
-      <div class="col-4">
-        <img id="comPic0" alt="">
-        <h1 id="comName0"></h1>
-      </div>
-
-      <div class="col-4">
-        <img id="comPic1" alt="">
-        <h1 id="comName1"></h1>
-      </div>
-
-      <div class="col-4">
-        <img id="comPic2" alt="">
-        <h1 id="comName2"></h1>
-      </div>
-      
-    </div>
-
-  </div> <!-- CONTAINER -->
+  <div class="container-fluid" id="footer">
+    <a href="http://marvel.com" target="_blank">Data provided by Marvel. © 2020 MARVEL</a>
+  </div>
   
+
   <!-- BootStrap: jQuery and Bootstrap Bundle (includes Popper) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
-    
-    <!-- JQuery UI -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
-    <!-- Index JS -->
-    <script src="/javascripts/index.js"></script>
+  <!-- JQuery UI -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+  <!-- Index JS -->
+  <script src="./javascripts/index.js"></script>
 </body>
 
 </html>

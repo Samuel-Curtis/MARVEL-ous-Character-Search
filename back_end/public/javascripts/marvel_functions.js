@@ -1,3 +1,12 @@
+/********************************************************
+ *                                                      *
+ *  If you are looking to use the Official Marvel API,  *
+ *      use the following link to get started!          *
+ *                                                      *
+ *          https://developer.marvel.com/               *
+ *                                                      *
+ ********************************************************/
+
 const axios = require('axios')
 const auth = require('./auth.js');
 
@@ -8,7 +17,7 @@ const privateKey = process.env.MARVEL_PRIVATE_KEY;
 let timeStamp = auth.getTimeStamp();
 let hashString = auth.createHash(timeStamp, privateKey, publicKey);
 
-// Get character info
+// Get character info, returns a character object based on the name variable
 function findByName(name) {
 
     // Make call via axios
@@ -21,32 +30,35 @@ function findByName(name) {
         }
     })
         .then(response => {
+            
+            // Just parsing through the data to get to the good stuff!
             let res = response.data.data.results;
 
             // Retrieve desired character data 
             let id = res[0].id;
+            let link = res[0].urls[1].url
             let name = res[0].name;
             let description = res[0].description;
-            let image_url = res[0].thumbnail.path + "/standard_large." + res[0].thumbnail.extension;
+            let image_url = res[0].thumbnail.path + "/standard_xlarge." + res[0].thumbnail.extension;
 
             // Create character object
             var character = {
                 name: name,
                 description: description,
                 picture: image_url,
+                link: link,
                 id: id
             }
 
             // Return character object
             return character;
-
         })
         .catch(err => {
-            console.log("AN ERROR OCCURRED: ", err);
+            console.log("AN ERROR OCCURRED INSIDE findByName(): ", err);
         })
 }
 
-// Get NameStartsWith
+// Get NameStartsWith, Returns an array of names that begin with the given parameter
 function getNameStartsWith(name) {
 
     // Make call via axios
@@ -60,6 +72,8 @@ function getNameStartsWith(name) {
         }
     })
         .then(response => {
+
+            // Just parsing through the data to get to the good stuff!
             let res = response.data.data.results;
 
             let characters = [];
@@ -68,15 +82,14 @@ function getNameStartsWith(name) {
                 characters.push(element.name)
             });
 
-            console.log("Character Name Array in function: ", characters)
             return characters;
         })
         .catch(err => {
-            console.log("AN ERROR OCCURRED: ", err);
+            console.log("AN ERROR OCCURRED INSIDE getNameStartsWith(): ", err);
         })
 }
 
-// Get Comic Info
+// Get Comic Info, returns an array of 3 comics based on the character ID parameter
 function getComicsByCharId(id) {
 
     return axios.get(endPoint + '/characters/' + id + '/comics', {
@@ -91,6 +104,8 @@ function getComicsByCharId(id) {
         }
     })
         .then(response => {
+
+            // Just parsing through the data to get to the good stuff!
             let res = response.data.data.results
 
             let comics = [];
@@ -98,6 +113,7 @@ function getComicsByCharId(id) {
             let loop = 0;
 
             while (comicsFound != 3) {
+
                 var thumbnailPath = res[loop].thumbnail.path;
 
                 // If there is no image or description, skip current comic and check the next
@@ -108,16 +124,18 @@ function getComicsByCharId(id) {
 
                 // If there is an image, then create a comic object and push it to the array
                 else {
+                    let comURL = res[loop].urls[0].url
                     let comID = res[loop].id;
                     let comName = res[loop].title;
                     let comDesc = res[loop].description;
-                    let comPic = res[loop].thumbnail.path + "/portrait_xlarge." + res[loop].thumbnail.extension;
+                    let comPic = res[loop].thumbnail.path + "/portrait_incredible." + res[loop].thumbnail.extension;
 
                     var comic = {
                         id: comID,
                         name: comName,
                         description: comDesc,
                         picture: comPic,
+                        link: comURL
                     }
 
                     comics.push(comic);
@@ -132,7 +150,4 @@ function getComicsByCharId(id) {
         })
 }
 
-
-
 module.exports = { findByName, getNameStartsWith, getComicsByCharId };
-
